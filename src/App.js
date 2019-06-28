@@ -1,42 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 
-class App extends React.Component {
-    render() {
-      return (
-         <div>
-            <h3>Array: {this.props.propArray}</h3>
-            <h3>Bool: {this.props.propBool ? "True..." : "False..."}</h3>
-            <h3>Func: {this.props.propFunc(3)}</h3>
-            <h3>Number: {this.props.propNumber}</h3>
-            <h3>String: {this.props.propString}</h3>
-            <h3>Object: {this.props.propObject.objectName1}</h3>
-            <h3>Object: {this.props.propObject.objectName2}</h3>
-            <h3>Object: {this.props.propObject.objectName3}</h3>
-         </div>
-      );
-   }
-}
+class Car extends React.Component {
+  constructor(props){
+    super(props);
 
-App.propTypes ={
-  propArray: PropTypes.array.isRequired,
-  propBool: PropTypes.bool.isRequired,
-  propFunc: PropTypes.func,
-  propNumber: PropTypes.number,
-  propString: PropTypes.string,
-  propObject: PropTypes.object
-}
-
-App.defaultProps ={
-  propArray: [1,2,3,4,5],
-  propBool: true,
-  propFunc: function(e){return e},
-  propNumber: 1,
-  propString: "My name is Kelvin",
-  propObject: {
-    objectName1: "objevtValue1",
-    objectName2: "objectValue2",
-    objectName3: "objectValue3"
+    this.state = {
+      data: [],
+      color: "red",
+      brand: "Ford",
+      model: "Mustang",
+      year: 1964
+    }
+  }
+  changeColor = () => {
+    this.setState({color: "blue"});
+  } 
+  render() {
+    return (
+        <div>
+          <h2>Using the props</h2>
+          <p>This is the {this.props.name} car!, Its Model is {this.props.brand.model} YOM: {this.props.brand.yom}</p> 
+          <h2>Using the state Object</h2>
+          <p>My {this.state.brand} </p>
+          <p> It is a {this.state.color} {this.state.model} from {this.state.year}</p>   
+          <button type="button" onClick={this.changeColor}>Change color</button>      
+        </div>
+    );
   }
 }
-export default App;
+class Garage extends React.Component{
+  render(){
+    const carname = "Ford";
+    const carinfo = {model: "Mustang", yom:2019};
+    return(
+      <div>
+        <h1>Who lives in my garage?</h1>
+        <Car brand={carinfo} name={carname} />
+      </div>
+    );
+  }
+}
+export default Garage;

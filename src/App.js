@@ -36,8 +36,50 @@ class Garage extends React.Component{
       <div>
         <h1>Who lives in my garage?</h1>
         <Car brand={carinfo} name={carname} />
+        <MyForm />
       </div>
     );
+  }
+}
+
+/**
+ * Input Form Component
+ */
+class MyForm extends React.Component{
+  constructor (props){
+    super(props);
+    this.state = {
+      username : '',
+      age: null
+    };
+  }
+  myChangeHandler = (event) => {
+    let nam = event.target.name;
+    let val = event.target.value;
+    this.setState({[nam]: val});
+  }
+  mySubmitHandler = (event) =>  {
+    event.preventDefault();
+    alert("You are submitting " + this.state.username);
+  }
+  render(){
+    let header ='';
+    if (this.state.username) {
+      header = <p>Your name is: {this.state.username} and your age is {this.state.age}</p>;
+    }else{
+      header = '';
+    }
+    return (
+      <form onSubmit={this.mySubmitHandler}>
+        <h1>React Forms</h1>
+        {header}
+        <p>Enter your name:</p>
+        <input type="text" onChange={this.myChangeHandler} name="username"></input>
+        <input type='submit' />
+        <p>Enter your age:</p>
+        <input type="text" name="age" onChange={this.myChangeHandler}/>
+      </form>
+    )
   }
 }
 export default Garage;

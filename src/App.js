@@ -10,7 +10,8 @@ class Car extends React.Component {
       brand: "Ford",
       model: "Mustang",
       year: 1964,
-      show: true
+      show: true,
+      mycar: 'Volvo'
     }
   }
 
@@ -117,12 +118,20 @@ class MyForm extends React.Component{
     super(props);
     this.state = {
       username : '',
-      age: null
+      age: null,
+      errormessage: ''
     };
   }
   myChangeHandler = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
+    let err = "";
+    if (nam === "age") {
+      if(val !=="" && !Number(val)){
+        err = <strong>Your age must be a number</strong>
+      }
+    }
+    this.setState({errormessage: err});
     this.setState({[nam]: val});
   }
   mySubmitHandler = (event) =>  {
@@ -142,9 +151,22 @@ class MyForm extends React.Component{
         {header}
         <p>Enter your name:</p>
         <input type="text" onChange={this.myChangeHandler} name="username"></input>
-        <input type='submit' />
         <p>Enter your age:</p>
         <input type="text" name="age" onChange={this.myChangeHandler}/>
+        {this.state.errormessage}
+        <br/>
+        <br/>
+        <input type='submit' />
+        <br/>
+        <br/>
+        <textarea value={this.state.description} />
+        <br/>
+        <br/>
+        <select value={this.state.mycar}>
+          <option value="Ford">Ford</option>
+          <option value="Volvo">Volvo</option>
+          <option value="Fiat">Fiat</option>
+        </select>
       </form>
     )
   }

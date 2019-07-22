@@ -151,16 +151,16 @@ class MyForm extends React.Component{
         <h1>React Forms</h1>
         {header}
         <p>Enter your name:</p>
-        <input type="text" onChange={this.myChangeHandler} name="username"></input>
+        <input className="form-control" type="text" onChange={this.myChangeHandler} name="username"></input>
         <p>Enter your age:</p>
-        <input type="text" name="age" onChange={this.myChangeHandler}/>
+        <input className="form-control" type="text" name="age" onChange={this.myChangeHandler}/>
         {this.state.errormessage}
         <br/>
         <br/>
-        <input type='submit' />
+        <input className="btn-success" type='submit' />
         <br/>
         <br/>
-        <textarea value={this.state.description} />
+        <textarea className="form-control" value={this.state.description} />
         <br/>
         <br/>
         <select value={this.state.mycar}>
@@ -188,6 +188,7 @@ class Child extends React.Component{
       <h1 style={{color:"blue", backgroundColor:"black"}}>Hello World!</h1>
       <p style={mystyle}>Hello style!</p>
       <p className={styles.bigblue}>Hello Kelvin Murumba!</p>
+      <button className="btn-primary">Boostrapped Button</button>
       </div>
     );
   }

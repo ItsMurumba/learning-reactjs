@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './mystyle.module.css';
 
 class Car extends React.Component {
   constructor(props){
@@ -176,8 +177,18 @@ class Child extends React.Component{
     alert("This component name Header is about to be unmounted");
   }
   render(){
+    const mystyle = {
+      color: "red",
+      backgroundColor: "DodgeBlue",
+      padding: "10px",
+      fontFamily: "Arial"
+    }
     return (
-      <h1>Hello World!</h1>
+      <div>
+      <h1 style={{color:"blue", backgroundColor:"black"}}>Hello World!</h1>
+      <p style={mystyle}>Hello style!</p>
+      <p className={styles.bigblue}>Hello Kelvin Murumba!</p>
+      </div>
     );
   }
 }

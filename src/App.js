@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './mystyle.module.css';
 
 class Car extends React.Component {
   constructor(props){
@@ -10,7 +11,8 @@ class Car extends React.Component {
       brand: "Ford",
       model: "Mustang",
       year: 1964,
-      show: true
+      show: true,
+      mycar: 'Volvo'
     }
   }
 
@@ -105,6 +107,7 @@ class Garage extends React.Component{
       <div>
         <h1>Who lives in my garage?</h1>
         <Car brand={carinfo} name={carname} />
+        <MyForm />
       </div>
     );
   }
@@ -112,14 +115,84 @@ class Garage extends React.Component{
 
 /**
  * Function to unmount a component
+ * Input Form Component
  */
+class MyForm extends React.Component{
+  constructor (props){
+    super(props);
+    this.state = {
+      username : '',
+      age: null,
+      errormessage: ''
+    };
+  }
+  myChangeHandler = (event) => {
+    let nam = event.target.name;
+    let val = event.target.value;
+    let err = "";
+    if (nam === "age") {
+      if(val !=="" && !Number(val)){
+        err = <strong>Your age must be a number</strong>
+      }
+    }
+    this.setState({errormessage: err});
+    this.setState({[nam]: val});
+  }
+  mySubmitHandler = (event) =>  {
+    event.preventDefault();
+    alert("You are submitting " + this.state.username);
+  }
+  render(){
+    let header ='';
+    if (this.state.username) {
+      header = <p>Your name is: {this.state.username} and your age is {this.state.age}</p>;
+    }else{
+      header = '';
+    }
+    return (
+      <form onSubmit={this.mySubmitHandler}>
+        <h1>React Forms</h1>
+        {header}
+        <p>Enter your name:</p>
+        <input className="form-control" type="text" onChange={this.myChangeHandler} name="username"></input>
+        <p>Enter your age:</p>
+        <input className="form-control" type="text" name="age" onChange={this.myChangeHandler}/>
+        {this.state.errormessage}
+        <br/>
+        <br/>
+        <input className="btn-success" type='submit' />
+        <br/>
+        <br/>
+        <textarea className="form-control" value={this.state.description} />
+        <br/>
+        <br/>
+        <select value={this.state.mycar}>
+          <option value="Ford">Ford</option>
+          <option value="Volvo">Volvo</option>
+          <option value="Fiat">Fiat</option>
+        </select>
+      </form>
+    )
+  }
+}
 class Child extends React.Component{
   componentWillUnmount(){
     alert("This component name Header is about to be unmounted");
   }
   render(){
+    const mystyle = {
+      color: "red",
+      backgroundColor: "DodgeBlue",
+      padding: "10px",
+      fontFamily: "Arial"
+    }
     return (
-      <h1>Hello World!</h1>
+      <div>
+      <h1 style={{color:"blue", backgroundColor:"black"}}>Hello World!</h1>
+      <p style={mystyle}>Hello style!</p>
+      <p className={styles.bigblue}>Hello Kelvin Murumba!</p>
+      <button className="btn-primary">Boostrapped Button</button>
+      </div>
     );
   }
 }

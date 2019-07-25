@@ -91,6 +91,8 @@ class Car extends React.Component {
 
           <div id="div1"></div>
           <div id="div2"></div>
+
+          
         </div>
     );
   }
@@ -109,7 +111,7 @@ class Garage extends React.Component{
 }
 
 /**
- * 
+ * Function to unmount a component
  */
 class Child extends React.Component{
   componentWillUnmount(){
@@ -119,6 +121,22 @@ class Child extends React.Component{
     return (
       <h1>Hello World!</h1>
     );
+  }
+}
+
+/**
+ * Passing Arguments
+ */
+class Football extends React.Component{
+  shoot = (a) => {
+    alert(a);
+  }
+  render(){
+    return(
+      <div>
+        <button onClick={() => this.shoot("Goal")}>Take the shot!</button>
+      </div>
+    )
   }
 }
 export default Garage;
